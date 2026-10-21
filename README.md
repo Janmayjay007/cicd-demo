@@ -46,7 +46,7 @@ A failing test blocks the build job, so a broken change can't produce an image.
 - [x] Flask API with tests
 - [x] Dockerfile with health check
 - [x] CI: test, build, smoke test
-- [ ] Push images to Amazon ECR
+- [x] Push images to Amazon ECR
 - [ ] Deploy to AWS
 - [ ] Staging, manual approval, production
 - [ ] Automatic rollback on failed health check
