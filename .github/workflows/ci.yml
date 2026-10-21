@@ -61,3 +61,18 @@ jobs:
           docker build -t $IMAGE .
           docker push $IMAGE
           echo "Pushed $IMAGE"
+      - name: Debug OIDC claims
+        if: always()
+        run: |
+          python3 - << 'PY'
+          import os, json, base64, urllib.request
+          req = urllib.request.Request(
+              os.environ["ACTIONS_ID_TOKEN_REQUEST_URL"] + "&audience=sts.amazonaws.com",
+              headers={"Authorization": "Bearer " + os.environ["ACTIONS_ID_TOKEN_REQUEST_TOKEN"]})
+          jwt = json.load(urllib.request.urlopen(req))["value"]
+          p = jwt.split(".")[1]
+          p += "=" * (-len(p) % 4)
+          c = json.loads(base64.urlsafe_b64decode(p))
+          for k in ("iss", "aud", "sub", "repository", "ref"):
+              print(k, "=", c.get(k))
+          PY
