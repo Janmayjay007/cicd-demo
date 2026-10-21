@@ -12,7 +12,7 @@ def test_health_returns_ok():
 def test_items_returns_list():
     res = client().get("/items")
     assert res.status_code == 200
-    assert len(res.get_json()) == 2
+    assert len(res.get_json()) == 3
 
 def test_version_defaults_to_dev():
     res = client().get("/version")
