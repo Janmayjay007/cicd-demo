@@ -48,6 +48,6 @@ A failing test blocks the build job, so a broken change can't produce an image.
 - [x] CI: test, build, smoke test
 - [x] Push images to Amazon ECR
 - [x] Deploy to AWS
-- [ ] Staging, manual approval, production
-- [ ] Automatic rollback on failed health check
+- [x] Staging, manual approval, production
+- [x] Automatic rollback on failed health check
 - [ ] Architecture diagram
