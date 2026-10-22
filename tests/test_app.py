@@ -17,3 +17,8 @@ def test_items_returns_list():
 def test_version_defaults_to_dev():
     res = client().get("/version")
     assert res.get_json()["version"] == "dev"
+
+def test_health_unhealthy_when_failure_simulated(monkeypatch):
+    monkeypatch.setenv("SIMULATE_FAILURE", "1")
+    res = client().get("/health")
+    assert res.status_code == 503
